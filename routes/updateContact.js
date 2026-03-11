@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     firstName,
     lastName,
     email,
-    phone
+    phone,
   } = req.body;
 
 
@@ -33,7 +33,8 @@ router.post('/', async (req, res) => {
     // Build update object, preserving streetAddress and apartmentNumber
     const updateFields = {
       streetAddress: existing.streetAddress,
-      apartmentNumber: existing.apartmentNumber
+      apartmentNumber: existing.apartmentNumber,
+      ticket:true
     };
 
     if (firstName) updateFields.firstName = firstName;

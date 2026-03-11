@@ -1,95 +1,25 @@
-<h1>{{title}}</h1>
-<p>{{message}}</p>
-
-<div class="top-right-button">
-    <a href="/check-address" class="btn-secondary" style="width: 220px;">🔍 Check Another Address</a>
-    <a href="#" id="editContactBtn" class="btn-secondary" style="width: 220px;">🔙 Edit Contact</a>
-</div>
-
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>Select</th>
-            <th>Street Address</th>
-            <th>Apartment</th>
-            <th>Zip Code</th>
-            <th>District</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input type="radio" name="selectedId" value="{{contact._id}}" required /></td>
-            <td>{{contact.streetAddress}}</td>
-            <td>{{contact.apartmentNumber}}</td>
-            <td>{{contact.zipCode}}</td>
-            <td>{{contact.district}}</td>
-            <td>{{contact.firstName}}</td>
-            <td>{{contact.lastName}}</td>
-            <td>{{contact.email}}</td>
-            <td>{{contact.phone}}</td>
-        </tr>
-    </tbody>
-</table>
-
-
-<!-- Hidden form shown after clicking "Edit Contact" -->
-<div id="editContactForm" style="display: none; margin-top: 20px;" class="styled-form">
-    <h2>Edit Contact</h2>
-    <form method="POST" action="/update-contact" style="margin-top: 2rem;" id="contactForm">
-        <!-- Hidden input for selectedId will be injected by JS -->
-
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" name="firstName" />
-        </div>
-
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" name="lastName" />
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" />
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" name="phone" />
-        </div>
-
-        <button type="submit" class="btn-secondary">Submit</button>
-    </form>
+<!-- confirmation.hbs -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{title}}</h5>
+      </div>
+      <div class="modal-body">
+        <p>Thank you for your registration. Please note:</p>
+        <ul><li>Tickets are while supplies last</li>
+        <li> First come, first served
+        </li>
+        <li>District 3 residents only</li>
+        <li>Limit one ticket per person</li>
+        <li> Tickets must be redeemed on Monday March 30 from 4:00PM -6:00PM</li>
+        <li>Ticket pickup Location will be emailed at a later time</li></ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-    document.getElementById('editContactBtn').addEventListener('click', function (e) {
-        e.preventDefault();
-
-
-        const selectedRadio = document.querySelector('input[name="selectedId"]:checked');
-        if (!selectedRadio) {
-            alert('Please select a contact to edit.');
-            return;
-        }
-
-        const selectedId = selectedRadio.value;
-
-        // Inject hidden input into the form
-        const hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'selectedId';
-        hiddenInput.value = selectedId;
-
-        const form = document.getElementById('contactForm');
-        form.prepend(hiddenInput);
-
-        // Show the form
-        document.getElementById('editContactForm').style.display = 'block';
-        this.style.display = 'none';
-    });
+  var modal = new bootstrap.Modal(document.getElementById('successModal'));
+  modal.show();
 </script>

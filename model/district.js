@@ -9,7 +9,7 @@ const RecordSchema = new mongoose.Schema({
   lastName:String,
   phone: String,             
   email: String,
-  ticket:Boolean     
+  ticket: { type: Boolean, default: undefined }   
 });
 
 module.exports = mongoose.model('District', RecordSchema, 'district');
