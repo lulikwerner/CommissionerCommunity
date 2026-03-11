@@ -1,0 +1,30 @@
+<section class="form-section">
+  <h1 class="section-title">Search for Address</h1>
+
+  <form method="GET" action="/check-address" class="styled-form">
+    <div class="form-group">
+      <label for="streetNumber">Street Name</label>
+      <input type="text" id="streetNumber" name="streetNumber" value="{{streetNumber}}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="streetType">Street Type</label>
+      <select id="streetType" name="streetType" required>
+        <option value="">--Select--</option>
+        <option value="ave" {{#if isAve}}selected{{/if}}>Avenue (Ave)</option>
+        <option value="blvd" {{#if isBlvd}}selected{{/if}}>Boulevard (Blvd)</option>
+        <option value="cir" {{#if isCir}}selected{{/if}}>Circle (Cir)</option>
+        <option value="ct" {{#if isCt}}selected{{/if}}>Court (Ct)</option>
+        <option value="dr" {{#if isDr}}selected{{/if}}>Drive (Dr)</option>
+        <option value="ln" {{#if isLn}}selected{{/if}}>Lane (Ln)</option>
+        <option value="mnr" {{#if isLn}}selected{{/if}}>Manor (Mnr)</option>
+        <option value="pl" {{#if isPl}}selected{{/if}}>Place (Pl)</option>
+        <option value="rd" {{#if isRd}}selected{{/if}}>Road (Rd)</option>
+        <option value="st" {{#if isSt}}selected{{/if}}>Street (St)</option>
+        <option value="ter" {{#if isTer}}selected{{/if}}>Terrace (Ter)</option>
+        <option value="way" {{#if isWay}}selected{{/if}}>Way (Way)</option>
+      </select>
+    </div>
+    <button type="submit" class="btn-secondary ">Search</button>
+  </form>
+</section>

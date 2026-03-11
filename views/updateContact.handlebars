@@ -1,0 +1,88 @@
+    <div class="top-right-button">
+      <a href="/check-address" class="btn-secondary">🔍 Check Another Address</a>
+    </div>
+{{#if (gt results.length 1)}}
+  <form method="GET" action="/check-address" class="apartment-filter-form">
+    <label for="apartmentSearch">Apartment Number:</label>
+    <input type="text" id="apartmentSearch" name="apartmentSearch" value="{{apartmentSearch}}" />
+    <button type="submit" class="btn-secondary">Search</button>
+
+    <!-- Preserve original street search -->
+    <input type="hidden" name="streetNumber" value="{{streetNumber}}" />
+    <input type="hidden" name="streetType" value="{{streetType}}" />
+  </form>  <!-- ✅ This closing tag was missing -->
+{{/if}}
+{{#if apartmentSearch}}
+  <div style="margin-top: 1rem;">
+    <a href="/check-address?streetNumber={{streetNumber}}&streetType={{streetType}}" class="btn-secondary">
+      🔙 Back to full list
+    </a>
+  </div>
+{{/if}}
+
+<section class="results-section">
+      <form method="POST" action="/update-contact"  style="margin-top: 2rem;">
+  <h2 class="section-title">Contact Information</h2>
+
+  <!-- 🟦 Table comes first -->
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>Street Address</th>
+        <th>Apartment</th>
+        <th>Zip Code</th>
+        <th>District</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each results}}
+      <tr>
+        <td><input type="radio" name="selectedId" value="{{_id}}" required /></td>
+        <td>{{streetAddress}}</td>
+        <td>{{apartmentNumber}}</td>
+        <td>{{zipCode}}</td>
+        <td>{{district}}</td>
+        <td>{{firstName}}</td>
+        <td>{{lastName}}</td>
+        <td>{{email}}</td>
+        <td>{{phone}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <!-- 🟨 Form comes below -->
+<div class="styled-form">
+    <h3>Register for event</h3>
+
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" name="firstName" />
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" name="lastName" />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="text" name="phone" />
+    </div>
+
+    <button type="submit" class="btn-secondary">Submit</button>
+</div>
+
+  </form>
+</section>
+

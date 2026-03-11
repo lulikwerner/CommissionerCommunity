@@ -1,0 +1,289 @@
+body {
+  margin: 0;
+font-family: 'Poppins', sans-serif;
+  background-color: #F5F1EC;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+   height: 100%;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #1F2A44;
+  color: #FFFFFF;
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 4px solid #CFAFAF;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.content h1{
+     color: #2D459C;
+}
+
+footer {
+  background-color: #1F2A44;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/*PROFILE PATTERSON*/
+.site-header {
+  padding: 10px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.header-image {
+  height: 150px; /* adjust as needed */
+  width: auto;
+  margin-right: 20px; /* space between image and text */
+}
+
+.header-content h1 {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+
+
+/*CHECH ADDRESS*/
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1F2A44;
+  text-align: center;
+}
+
+.styled-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+.styled-table th, .styled-table td {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #1F2A44;
+  color: white;
+}
+
+.styled-form {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  appearance: none; /* Optional: removes default dropdown styling */
+}
+.form-group {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+
+
+/*CHECK ANOTHER ADDRESS*/
+.top-right-button {
+  position:sticky;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 1000;
+}
+
+
+.btn-secondary {
+  display: inline-block;
+  background-color:  #FFC301;
+  color: #1F2A44;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+border: 2px solid #1F2A44;
+
+}
+
+.btn-secondary:hover {
+  background-color:  #DAA520;
+}
+
+
+/* Form container */
+.styled-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Form fields */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+
+/* Table styling */
+.styled-table {
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 0.95rem;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+}
+
+.styled-table th,
+.styled-table td {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #1F2A44;
+  color: white;
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.apartment-filter-form input[type="text"] {
+  width: 150px;
+  max-width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+
+.styled-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: #fdf1ff;
+}
+
+.styled-table tr:hover {
+  background-color: #ffeef8;
+  transition: background-color 0.3s ease;
+}
