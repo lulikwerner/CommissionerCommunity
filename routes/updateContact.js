@@ -49,7 +49,7 @@ console.log('Updated registration:', plainContact);
 
 
     res.render('confirmation', {
-      title: 'Update Successful',
+      title: 'Registration Successful',
      // message: 'Contact information has been updated successfully.',
       contact: plainContact,
       contactId:selectedId

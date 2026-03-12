@@ -8,7 +8,7 @@ const District = require('../model/district');
 // What I use to upload addresses
 const upload = multer({ dest: 'uploads/' });
 
-router.post('/upload', upload.single('file'), (req, res) => {
+router.post('/', upload.single('file'), (req, res) => {
   const results = [];
 
   fs.createReadStream(req.file.path)

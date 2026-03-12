@@ -3,6 +3,20 @@ const router = express.Router();
 const District = require('../model/district');
 const path = require('path');
 
+const typeMap = {
+  st: 'STREET',
+  ave: 'AVENUE',
+  rd: 'ROAD',
+  blvd: 'BOULEVARD',
+  dr: 'DRIVE',
+  ct: 'COURT',
+  ln: 'LANE',
+  mnr: 'MANOR',
+  pl: 'PLACE',
+  ter: 'TERRACE',
+  cir: 'CIRCLE',
+  way: 'WAY'
+};
 
 
 
@@ -17,8 +31,10 @@ router.get('/', async (req, res) => {
   if (streetNumber && streetType) {
     streetNumber = streetNumber.trim().replace(/\s+/g, '');
     streetType = streetType.trim().replace(/\s+/g, '');
+    streetType = typeMap[streetType] || streetType;
     const fullAddress = `${streetNumber}${streetType}`.toUpperCase();
-    
+console.log("Buscando (GET):", fullAddress);
+
 
 
     try {
@@ -107,6 +123,7 @@ results = await District.aggregate([
 router.post('/', async (req, res) => {
   const { streetNumber, streetType } = req.body;
   const fullAddress = `${streetNumber}${streetType}`.toUpperCase();
+console.log("Buscando:", fullAddress);
 
   try {
     const results = await District.find({ streetAddress: fullAddress });
