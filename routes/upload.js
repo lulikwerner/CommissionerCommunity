@@ -14,22 +14,19 @@ router.post('/', upload.single('file'), (req, res) => {
 fs.createReadStream(req.file.path)
   .pipe(csv())
   .on('data', (data) => {
-    // ⚡ Limits to 26 registros
-    if (results.length < 26) {
       results.push({
         streetAddress: data.streetAddress?.toUpperCase().replace(/\s+/g, ''),
         apartmentNumber: data.apartmentNumber,
         zipCode: data.zipCode,
         district: data.district
-      });
-    }
+      });    
   })
     .on('end', async () => {
       try {
-        // 🔥 Delete all existing documents
+        // Delete all existing documents
         await District.deleteMany({});
 
-        // 💾 Insert new data
+        //  Insert new data
         await District.insertMany(results);
 
         fs.unlinkSync(req.file.path);
