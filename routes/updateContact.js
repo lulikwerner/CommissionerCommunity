@@ -1,44 +1,50 @@
 const express = require('express');
 const router = express.Router();
-const Register = require('../model/register'); // tu modelo Register
+const District = require('../model/district'); 
+const Register = require('../model/register');
 
 router.post('/', async (req, res) => {
-  const { firstName, lastName, email, phone, streetAddress, apartmentNumber } = req.body;
+  const { selectedId, firstName, lastName, email, phone } = req.body;
 
-  // validation
-  if (!firstName || !lastName || !email) {
+  if (!selectedId) {
     return res.status(400).render('error', {
-      title: 'Missing Data',
-      message: 'First name, last name, and email are required.'
+      title: 'Missing Selection',
+      message: 'Please select an address to register.'
     });
   }
 
   try {
-    // Up to 25 registrants
-    const count = await Register.countDocuments();
+    // Search District
+    const district = await District.findById(selectedId);
+    if (!district) {
+      return res.status(404).render('error', {
+        title: 'District Not Found',
+        message: 'No matching district found.'
+      });
+    }
 
+    // Limit registration to 25
+    const count = await Register.countDocuments();
     if (count >= 25) {
-      // Si ya hay 25 o más, mostrar página max_reached
       return res.render('max_reached', {
         title: 'Maximum Registrations Reached',
         message: 'No more registrations can be accepted at this time.'
       });
     }
 
-    // new user in register
+    // New register
     const newRegistration = new Register({
       firstName,
       lastName,
       email,
       phone: phone || '',
-      streetAddress: streetAddress || '',
-      apartmentNumber: apartmentNumber || '',
+      streetAddress: district.streetAddress,
+      apartmentNumber: district.apartmentNumber,
       ticket: true
     });
 
     const savedRegistration = await newRegistration.save();
 
-    // Mostrar confirmación
     res.render('confirmation', {
       title: 'Registration Successful',
       contact: savedRegistration,
@@ -46,15 +52,12 @@ router.post('/', async (req, res) => {
     });
 
   } catch (err) {
-    console.error('Error saving registration:', err);
+    console.error(err);
     res.status(500).render('error', {
       title: 'Server Error',
-      message: 'Could not save the registration. Please try again later.'
+      message: 'Could not save registration. Please try again later.'
     });
   }
 });
-
-module.exports = router;
-
 
 module.exports = router;
