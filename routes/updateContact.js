@@ -1,66 +1,60 @@
 const express = require('express');
 const router = express.Router();
-const District = require('../model/district');
+const Register = require('../model/register'); // tu modelo Register
 
 router.post('/', async (req, res) => {
-  const {
-    selectedId, // from radio button
-    firstName,
-    lastName,
-    email,
-    phone,
-  } = req.body;
+  const { firstName, lastName, email, phone, streetAddress, apartmentNumber } = req.body;
 
-
-  if (!selectedId) {
+  // validation
+  if (!firstName || !lastName || !email) {
     return res.status(400).render('error', {
-      title: 'Missing Selection',
-      message: 'Please select an address to register.'
+      title: 'Missing Data',
+      message: 'First name, last name, and email are required.'
     });
   }
 
   try {
-    // Find the exact record by _id
-    const existing = await District.findById(selectedId);
+    // Up to 25 registrants
+    const count = await Register.countDocuments();
 
-    if (!existing) {
-      return res.status(404).render('not_found', {
-        title: 'Address Not Found',
-        message: 'No matching address was found to update.'
+    if (count >= 25) {
+      // Si ya hay 25 o más, mostrar página max_reached
+      return res.render('max_reached', {
+        title: 'Maximum Registrations Reached',
+        message: 'No more registrations can be accepted at this time.'
       });
     }
 
-    // Build update object, preserving streetAddress and apartmentNumber
-    const updateFields = {
-      streetAddress: existing.streetAddress,
-      apartmentNumber: existing.apartmentNumber,
-      ticket:true
-    };
+    // new user in register
+    const newRegistration = new Register({
+      firstName,
+      lastName,
+      email,
+      phone: phone || '',
+      streetAddress: streetAddress || '',
+      apartmentNumber: apartmentNumber || '',
+      ticket: true
+    });
 
-    if (firstName) updateFields.firstName = firstName;
-    if (lastName) updateFields.lastName = lastName;
-    if (phone) updateFields.phone = phone;
-    if (email) updateFields.email = email;
+    const savedRegistration = await newRegistration.save();
 
-    const updated = await District.findByIdAndUpdate(selectedId, updateFields, { new: true });
-    const plainContact = JSON.parse(JSON.stringify(updated));
-console.log('Updated registration:', plainContact);
-
-
-
+    // Mostrar confirmación
     res.render('confirmation', {
       title: 'Registration Successful',
-     // message: 'Contact information has been updated successfully.',
-      contact: plainContact,
-      contactId:selectedId
+      contact: savedRegistration,
+      contactId: savedRegistration._id
     });
+
   } catch (err) {
-    console.error('Error updating record:', err);
+    console.error('Error saving registration:', err);
     res.status(500).render('error', {
       title: 'Server Error',
-      message: 'Could not update the registration. Please try again later.'
+      message: 'Could not save the registration. Please try again later.'
     });
   }
 });
+
+module.exports = router;
+
 
 module.exports = router;
