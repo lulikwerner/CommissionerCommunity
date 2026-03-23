@@ -13,12 +13,14 @@ const PORT = process.env.PORT || 3007;
 //  Handlebars
 const hbs = exphbs.create({
   defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, 'views/layouts'),
   helpers: {
     gt: function (a, b) {
       return a > b;
     }
   }
 });
+
 
 
 app.engine('handlebars', hbs.engine);
