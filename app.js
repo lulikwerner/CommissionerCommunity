@@ -26,17 +26,21 @@ app.set('views', path.join(__dirname, 'views'));
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res) => {
+  res.render('closeregistration');
+});
 
-// Archivos estáticos
+
+// Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rutas
+// Routes
 const uploadRoute = require('./routes/upload');
 const routes = require('./routes');
 app.use('/upload', uploadRoute);
 app.use('/', routes);
 
-// Conexión a MongoDB Atlas (sin opciones obsoletas)
+// Mongo connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('✅ Conectado a MongoDB Atlas');
