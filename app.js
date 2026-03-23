@@ -10,14 +10,16 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3007;
 
-// Configuración de Handlebars
+//  Handlebars
 const hbs = exphbs.create({
+  defaultLayout: 'main',
   helpers: {
     gt: function (a, b) {
       return a > b;
     }
   }
 });
+
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
